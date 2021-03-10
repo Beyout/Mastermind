@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype 3</title>
+    <link rel="stylesheet" type="text/css" href="jeu.css" />
+    <script src="jeu.js"></script>
+</head>
+
+<body onLoad="genereSecret();afficheRegles();randomBoss();">
+
+
+    <input id="bouton_valider" type="button" value="Valider" onclick="valider();">
+    <input id="bouton_regles" type="button" value="Règles" onclick="afficheRegles();">
+
+    <div id="gagne_fond" hidden>
+        <div class="gagne" id="myPopup">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>Bravo !<br>Le monstre a été vaincu !</h1>
+            <br>
+            <br>
+            <input id="bouton_recommencer" type="button" value="Nouvelle Partie" onclick="nouvellePartie();">
+            <br>
+        </div>
+    </div>
+
+    <div id="perdu_fond" hidden>
+        <div class="perdu" id="myPopup">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>L'ennemi est arrivé au donjon !<br>Fuyez !</h1>
+            <br>
+            <br>
+            <input id="bouton_recommencer" type="button" value="Nouvelle Partie" onclick="nouvellePartie();">
+            <br>
+        </div>
+    </div>
+
+    <div class="selectionnables">
+        <img class="bille" id="bille_rose" src="personnages/alfyn.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <img class="bille" id="bille_bleue" src="personnages/therion.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <br>
+        <img class="bille" id="bille_bordeaux" src="personnages/cyrus.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <img class="bille" id="bille_jaune" src="personnages/haanit.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <br>
+        <img class="bille" id="bille_cyan" src="personnages/olberic.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <img class="bille" id="bille_grise" src="personnages/ophilia.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <br>
+        <img class="bille" id="bille_orange" src="personnages/primrose.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+        <img class="bille" id="bille_verte" src="personnages/tressa.png" alt="" draggable="true"
+            ondragstart="drag(event)">
+    </div>
+
+    <div id="ligne_jouable">
+        <img id="case10" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <img id="case11" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <img id="case12" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <img id="case13" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+    </div>
+
+    <div id="ligne">
+        <img id="case20" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case21" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case22" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case23" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc20" class="pion" src="pions/blanc2.webp" alt="" hidden draggable="false">
+        <img id="pion_blanc21" class="pion" src="pions/blanc2.webp" alt="" hidden draggable="false">
+        <img id="pion_blanc22" class="pion" src="pions/blanc2.webp" alt="" hidden draggable="false">
+        <img id="pion_blanc23" class="pion" src="pions/blanc2.webp" alt="" hidden draggable="false">
+        <img id="pion_rouge20" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge21" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge22" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge23" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case30" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case31" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case32" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case33" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc30" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc31" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc32" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc33" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge30" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge31" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge32" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge33" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case40" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case41" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case42" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case43" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc40" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc41" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc42" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc43" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge40" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge41" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge42" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge43" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case50" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case51" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case52" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case53" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc50" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc51" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc52" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc53" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge50" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge51" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge52" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge53" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case60" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case61" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case62" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case63" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc60" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc61" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc62" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc63" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge60" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge61" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge62" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge63" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case70" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case71" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case72" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case73" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc70" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc71" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc72" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc73" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge70" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge71" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge72" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge73" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case80" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case81" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case82" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case83" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc80" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc81" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc82" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc83" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge80" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge81" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge82" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge83" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case90" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case91" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case92" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case93" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc90" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc91" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc92" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc93" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge90" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge91" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge92" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge93" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case100" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case101" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case102" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case103" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc100" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc101" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc102" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc103" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge100" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge101" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge102" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge103" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>
+        <img id="case110" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case111" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case112" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case113" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc110" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc111" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc112" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc113" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge110" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge111" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge112" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge113" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>  
+        <img id="case120" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case121" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case122" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="case123" class="bille" src="personnages/Black characters/alfyn_black.png" alt="" draggable="false">
+        <img id="pion_blanc120" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc121" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc122" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_blanc123" class="pion" src="pions/blanc2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge120" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge121" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge122" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <img id="pion_rouge123" class="pion" src="pions/rouge2.webp" alt="" hidden  draggable="false">
+        <br>    
+    </div>
+
+    <div id="regles" hidden>
+        <div id="texte">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>Général(e) !</h1>
+            <p>La capitale est attaquée par <span id="nom_boss"></span> , nous avons besoin de votre aide !<br>
+            Vous devez créer la meilleure équipe pour le défaire.<br>
+            Nous disposons de 8 types de combattants dans la garnison :<br>
+            l’<span id="rose" >Apothicaire</span>, le<span id="bleu"> Voleur</span>, l'<span id="rouge">Érudit</span>, la<span id="jaune"> Chasseresse</span>, le<span id="cyan"> Guerrier</span>, la<span id="orange"> Prêtresse</span>, la<span id="vert"> Danseuse</span> et l'<span id="noir">Aventurière</span>.<br>
+            <br>
+            Ne vous inquiétez pas, des éclaireurs sont allés étudier les faiblesses du monstre et vont vous aider pour former votre équipe à l’aide d’informations.<br>
+            Vous aurez 3 types d’informations qui seront affichés lorsque que vous aurez proposé votre équipe :<br>
+            →Si vous avez cette information <img id="pion_texte" src="pions/blanc.webp" alt="">, c’est que vous avez placé un personnage mais il n’est pas à la bonne position.<br>
+            →Si vous avez cette information <img id="pion_texte" src="pions/rouge.webp" alt="">, c’est que vous avez placé un personnage à la bonne position.<br>
+            → Si il y a un vide, c’est qu’un des personnages n’est pas efficace pour combattre le monstre.<br>
+            <br>
+            Vous n’avez que 12 essais avant que le monstre n'arrive au donjon ! 
+            <br>
+            <br>
+            Bon courage !</p>
+            <br>
+            <br>
+            <br>
+            <input id="bouton_fermer" type="button" value="Fermer" onclick="fermerRegles();"> 
+        </div>
+    </div>
+
+    <img id="boss" src="" alt="" draggable="false">
+
+    <div id="erreur" hidden>
+        <p>Cette composition est invalide Général(e) !</p>
+    </div>
+	
+	<audio id="fond">
+		<source src="musique/fond.mp3">
+    </audio>
+    <audio id="victory" src="musique/victory.mp3"></audio>
+    <audio id="defeat" src="musique/defeat.mp3"></audio>
+	<div class="divBouton">
+		<h2 id="text-Mu">Musique</h2>
+        <input type="image" src="musique/play.png" id="jouer" name="points" onclick=lancer() draggable="false">
+		<input type="image" src="musique/mute.png" id="couper" name="points" onclick=couperSon() draggable="false">
+		<br>
+		<p id="text-Vol">-Volume-</p>
+		<input type="range" id="volu" class="barre" name="volu" min="0" max="100" onchange=changVol() draggable="false">
+	</div>
+
+</body>
+
+</html>
